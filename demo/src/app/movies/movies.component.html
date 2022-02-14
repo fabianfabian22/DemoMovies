@@ -1,1 +1,24 @@
-<p>movies works!</p>
+
+   <h1 class="text-center text-4xl sm:text-7xl font-extrabold m-10 bg-gradient-to-r from-red-400 to-orange-800 text-transparent bg-clip-text">Movies</h1>
+
+   <div  *ngFor="let product of movies$ ">
+   <div  class="md:container md:mx-auto">
+     <div class="md:flex">
+       <div class="md:shrink-0">
+         <img class="block mx-auto h-45  shadow-md" src="{{product['poster']}}" alt="{{product['title']}}">
+       </div>
+       <div class="p-8">
+         <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{{ product['title' ]  }}</div>
+         <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">año {{ product['year' ]}}</span>
+         <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">duracion {{ product['duration' ]}} min</span>
+         <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">imdbRating {{ product['imdbRating' ]}}</span>
+         <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">Actores {{ product['actors' ]}} </span>
+
+       </div>
+     </div>
+   </div>
+  </div>
+
+
+
+
