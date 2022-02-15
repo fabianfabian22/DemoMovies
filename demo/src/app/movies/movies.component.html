@@ -12,7 +12,14 @@
          <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">año {{ product['year' ]}}</span>
          <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">duracion {{ product['duration' ]}} min</span>
          <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">imdbRating {{ product['imdbRating' ]}}</span>
-         <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">Actores {{ product['actors' ]}} </span>
+         <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
+
+        <div class="card" *ngFor="let item of getDataofActors(product['actors' ])">
+          <span  class="subpixel-antialiased italic font-normal" >
+            {{ item['first_name' ]}} {{ item['last_name' ]}}
+          </span>
+       </div>
+          </span>
 
        </div>
      </div>

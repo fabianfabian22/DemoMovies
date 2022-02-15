@@ -18,7 +18,7 @@ export  const initalState :MovieState= {
 export const MoviesReducer = createReducer<MovieState>(
   initalState,
   on(movieActions.loadSuccessMovies, (state , action) : MovieState  => {
-    console.log('MovieState : ', action.movies );
+
     return {
       ...state,
       movies: action.movies

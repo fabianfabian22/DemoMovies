@@ -9,17 +9,15 @@ import { Movies } from 'src/models/movie.model';
 @Injectable({
   providedIn: 'root',
 })
-export class MoviesService {
-  private moviesUrl = 'api/movies';
+export class ActorsService {
+  private actorsUrl = 'api/actors';
 
-  constructor(private http: HttpClient) {
-    console.log('moviesUrl: ', this.moviesUrl);
-  }
+  constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<any> {
-         return this.http.get(this.moviesUrl)
+  getActors(): Observable<any> {
+         return this.http.get(this.actorsUrl)
               .pipe(
-              //  tap(data => console.log(JSON.stringify(data))),
+                //tap(data => console.log(JSON.stringify(data))),
                 catchError(this.handleError)
               );
   }
