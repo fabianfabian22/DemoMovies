@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { ActorsModule } from './actors/actors.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { ActorsModule } from './actors/actors.module';
     ActorsModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    NgxSpinnerModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

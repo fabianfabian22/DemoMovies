@@ -1,6 +1,8 @@
 module.exports = {
   prefix: '',
+  important: true,
   purge: {
+    enabled: true,
     content: [
       './src/**/*.{html,ts}',
     ]
@@ -11,6 +13,10 @@ module.exports = {
   },
   variants: {
     extend: {},
+  },
+
+  corePlugins: {
+    preflight: false,
   },
   plugins: [require('@tailwindcss/forms'),require('@tailwindcss/typography')],
 };

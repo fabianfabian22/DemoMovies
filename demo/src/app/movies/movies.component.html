@@ -1,5 +1,5 @@
 
-   <h1 class="text-center text-4xl sm:text-7xl font-extrabold m-10 bg-gradient-to-r from-red-400 to-orange-800 text-transparent bg-clip-text">Movies</h1>
+   <h1 class="text-center text-4xl sm:text-7xl font-extrabold m-5 bg-gradient-to-r from-red-100 to-zinc-600 text-transparent bg-clip-text">Movies</h1>
 
    <div  *ngFor="let product of movies$ ">
    <div  class="md:container md:mx-auto">
@@ -26,6 +26,7 @@
    </div>
   </div>
 
-
-
+  <div  *ngIf="loading"  class="flex items-center justify-center ">
+    <div class="w-40 h-40 border-t-4 border-b-4 border-red-600 rounded-full animate-spin"></div>
+</div>
 

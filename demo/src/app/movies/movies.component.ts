@@ -8,6 +8,7 @@ import * as reducersMovies from './state/movies.reducer';
 
 import * as actorsReducers from '../actors/state/actors.reducer';
 import * as  actorActions from '../actors/state/actors.actions';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -18,25 +19,31 @@ import * as  actorActions from '../actors/state/actors.actions';
 export class MoviesComponent implements OnInit {
   movies$: any;
   actors$: any;
-  movieActors: any[]=[];
+  movieActors: any[] = [];
+  loading = true;
 
-  constructor(private store: Store<any>) { }
+  constructor(private store: Store<any>,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.store.dispatch(movieActions.loadMovies());
     this.store.dispatch(actorActions.loadActors());
     setTimeout(() => {
       this.store.select(reducersMovies.getAllMovies).subscribe(allMovies => {
-        this.movies$ = allMovies.movies;
+        this.movies$ = allMovies.movies.filter(movie => movie.poster!==null);
         this.getActors();
       })
-   }, 5000)
+   }, 1000)
   }
 
   getActors() {
     this.store.select(actorsReducers.getAllActors).subscribe(
       Actors => {
-        this.actors$ = Actors.actors; })
+        this.actors$ = Actors.actors;
+      })
+      this.loading = false;
+
   }
 
 getDataofActors(listOfActors: any[]) {

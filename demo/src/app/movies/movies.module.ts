@@ -7,6 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { MoviesReducer } from './state/movies.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { MoviesEffects } from './state/movies.effects';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { MoviesEffects } from './state/movies.effects';
     CommonModule,
     MoviesRoutingModule,
     StoreModule.forFeature('movies', MoviesReducer),
-    EffectsModule.forFeature([MoviesEffects])
+    EffectsModule.forFeature([MoviesEffects]),
+    NgxSpinnerModule
   ]
 })
 export class MoviesModule { }
