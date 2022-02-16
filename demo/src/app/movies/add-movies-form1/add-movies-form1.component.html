@@ -1,0 +1,203 @@
+<form  #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)" >
+<div class="antialiased container mx-auto px-20">
+  <div class="max-w-xl mx-auto py-12 divide-y md:max-w-4xl">
+    <div class="py-4">
+      <h1 class="text-4xl font-bold">Formulario de peliculas</h1>
+      <p class="mt-2 text-lg text-gray-600">
+        Formulario para la inserción de peliculas:
+      </p>
+
+    </div>
+
+    <div class="py-2">
+      <h2 class="text-2xl font-bold">Agregar pelicula</h2>
+      <div class="mt-8 max-w-md">
+        <div class="grid grid-cols-1 gap-6">
+          <label class="block">
+            <span class="text-gray-700">Titulo</span>
+            <input
+              type="text"
+              class="
+                mt-1
+                block
+                w-full
+                rounded-md
+                bg-gray-100
+                border-transparent
+                focus:border-gray-500 focus:bg-white focus:ring-0
+              "
+              placeholder=""
+              [(ngModel)]="objMovie.titulo" name = 'titulo' required
+            />
+          </label>
+          <label class="block">
+            <span class="text-gray-700">Poster</span>
+            <input
+              type="text"
+              class="
+                mt-1
+                block
+                w-full
+                rounded-md
+                bg-gray-100
+                border-transparent
+                focus:border-gray-500 focus:bg-white focus:ring-0
+              "
+              [(ngModel)]="objMovie.poster" name = 'poster' required
+            />
+          </label>
+
+          <label class="block">
+            <span class="text-gray-700">Genero</span>
+            <select
+              class="
+                block
+                w-full
+                mt-1
+                rounded-md
+                bg-gray-100
+                border-transparent
+                focus:border-gray-500 focus:bg-white focus:ring-0
+              "
+              multiple
+              [(ngModel)]="objMovie.genero"    name = 'genero' required
+            >
+              <option  *ngFor="let item of generos">{{item}}</option>
+
+            </select>
+          </label>
+
+
+
+          <label class="block">
+            <span class="text-gray-700">Estudios</span>
+            <input
+              type="text"
+              class="
+                mt-1
+                block
+                w-full
+                rounded-md
+                bg-gray-100
+                border-transparent
+                focus:border-gray-500 focus:bg-white focus:ring-0
+              "
+              placeholder=""
+              [(ngModel)]="objMovie.estudio" name = 'estudio' required
+            />
+          </label>
+
+          <label class="block">
+            <span class="text-gray-700">Actores</span>
+            <select
+              class="
+                block
+                w-full
+                mt-1
+                rounded-md
+                bg-gray-100
+                border-transparent
+                focus:border-gray-500 focus:bg-white focus:ring-0
+              "
+              name = 'actors' ngModel
+            >
+
+            <option  *ngFor="let act of allActors[0]"  value=" {{act['id']}} ">
+               {{act['first_name']}}  {{act['last_name']}}
+            </option>
+            </select>
+            <ul ><li  let act2 of actors>
+              actors
+            </li></ul>
+          </label>
+          <label class="block">
+            <span class="text-gray-700">Genero</span>
+            <ng-multiselect-dropdown
+            [placeholder]="'Genero'"
+            [settings]="dropdownSettings"
+            [data]="dropdownList"
+            [(ngModel)]="selectedItems"
+            (onSelect)="onItemSelect($event)"
+            [name]="'estudio'"
+            class="block w-full mt-1 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+          >
+          </ng-multiselect-dropdown>
+          </label>
+          <label class="block">
+            <span class="text-gray-700">Años</span>
+            <select
+              class="
+                block
+                w-full
+                mt-1
+                rounded-md
+                bg-gray-100
+                border-transparent
+                focus:border-gray-500 focus:bg-white focus:ring-0
+              "
+            >
+              <option>Corporate event</option>
+              <option>Wedding</option>
+              <option>Birthday</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label class="block">
+            <span class="text-gray-700">Duracion</span>
+            <select
+              class="
+                block
+                w-full
+                mt-1
+                rounded-md
+                bg-gray-100
+                border-transparent
+                focus:border-gray-500 focus:bg-white focus:ring-0
+              "
+            >
+              <option>Corporate event</option>
+              <option>Wedding</option>
+              <option>Birthday</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label class="block">
+            <span class="text-gray-700">Puntacion</span>
+            <select
+              class="
+                block
+                w-full
+                mt-1
+                rounded-md
+                bg-gray-100
+                border-transparent
+                focus:border-gray-500 focus:bg-white focus:ring-0 "
+            >
+              <option>Corporate event</option>
+              <option>Wedding</option>
+              <option>Birthday</option>
+              <option>Other</option>
+            </select>
+          </label>
+
+
+          <div class="block">
+            <div class="mt-2">
+              <div>
+                <label class="inline-flex items-center">
+
+                    <button
+                    type="submit" [disabled]="!myForm.valid"
+                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Guardar</button>
+
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+{{myForm.value | json}}

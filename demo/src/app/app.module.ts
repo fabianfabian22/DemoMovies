@@ -9,7 +9,8 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { ActorsModule } from './actors/actors.module';
-import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
-    NgxSpinnerModule
+    NgMultiSelectDropDownModule.forRoot()
 
   ],
   providers: [],
