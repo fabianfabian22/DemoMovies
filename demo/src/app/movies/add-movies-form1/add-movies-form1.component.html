@@ -89,7 +89,7 @@
 
           <label class="block">
             <span class="text-gray-700">Actores</span>
-            <select
+            <!-- <select
               class="
                 block
                 w-full
@@ -108,21 +108,45 @@
             </select>
             <ul ><li  let act2 of actors>
               actors
-            </li></ul>
+            </li></ul> -->
+
+            <span class="text-gray-700">Actores</span>
+            <ng-select
+            class="
+                mt-1
+                block
+                w-full
+                rounded-md
+                bg-gray-100
+                border-transparent
+                focus:border-gray-500 focus:bg-white focus:ring-0
+              "
+                             [items]="allActors[0]"
+                             bindLabel="fullName"
+                             placeholder="Select actor"
+                             appendTo="body"
+                              [multiple]="multiple"
+                               [(ngModel)]="objMovie.actors"
+                               bindValue="id"
+                               name="actors">
+                                  </ng-select>
+
+
+
+
           </label>
           <label class="block">
             <span class="text-gray-700">Genero</span>
-            <ng-multiselect-dropdown
-            name="genero"
-            [placeholder]="'custom placeholder'"
-            [settings]="dropdownSettings"
-            [data]="dropdownList"
-            [(ngModel)]="selectedItems"
-            (onSelect)="onItemSelect($event)"
+            <ng-select
 
-          >
-          </ng-multiselect-dropdown>
-
+                             [items]="gender"
+                              bindLabel="genderType"
+                              placeholder="Select item"
+                              appendTo="body"
+                              [multiple]="multiple"
+                               [(ngModel)]="objMovie.gender"
+                               name="gender">
+                                  </ng-select>
 
           </label>
           <label class="block">
@@ -142,23 +166,20 @@
           />
           </label>
           <label class="block">
-            <span class="text-gray-700">Duracion</span>
-            <select
-              class="
-                block
-                w-full
-                mt-1
-                rounded-md
-                bg-gray-100
-                border-transparent
-                focus:border-gray-500 focus:bg-white focus:ring-0
-              "
-            >
-              <option>Corporate event</option>
-              <option>Wedding</option>
-              <option>Birthday</option>
-              <option>Other</option>
-            </select>
+            <span class="text-gray-700">Rating IMGB</span>
+            <input
+            type="number"
+            class="
+              mt-1
+              block
+              w-full
+              rounded-md
+              bg-gray-100
+              border-transparent
+              focus:border-gray-500 focus:bg-white focus:ring-0
+            "
+            [(ngModel)]="objMovie.rating" name = 'rating' required
+          />
           </label>
           <label class="block">
 

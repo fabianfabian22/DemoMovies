@@ -7,8 +7,8 @@ import { AddMoviesForm1RoutingModule } from './add-movies-form1-routing.module';
 import { AddMoviesForm1Component } from './add-movies-form1.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ShareModule } from '@app/share/share.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,9 +20,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     AddMoviesForm1RoutingModule,
     StoreModule.forFeature('movies', MoviesReducer),
     EffectsModule.forFeature([MoviesEffects]),
+    ShareModule,
     FormsModule,
-    ReactiveFormsModule,
-    NgMultiSelectDropDownModule.forRoot()
+
   ]
 })
 export class AddMoviesForm1Module { }

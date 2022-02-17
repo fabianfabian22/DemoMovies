@@ -10,6 +10,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { ActorsModule } from './actors/actors.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ShareModule } from './share/share.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+   FormsModule
 
   ],
   providers: [],

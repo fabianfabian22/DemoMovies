@@ -1,9 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
-import * as actorsReducers from './../../actors/state/actors.reducer';
-import * as  actorActions from './../../actors/state/actors.actions';
+import * as actorsReducers from '@app/actors/state/actors.reducer';
+import * as actorActions from '@app/actors/state/actors.actions';
 import { Store } from '@ngrx/store';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 
 @Component({
@@ -12,76 +11,45 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
   styleUrls: ['./add-movies-form1.component.scss']
 })
 export class AddMoviesForm1Component implements OnInit {
-  generos : any[] = [];
+  gender: any[] = [];
   actors$: any;
   allActors: any[] = [];
+  multiple = true;
+  selectedGeneros = [] as any;
 
-  dropdownList = [] as  any;
-  selectedGeneros = [] as  any;
-  dropdownSettings : IDropdownSettings={};
 
   objMovie = {
     titulo: "",
     poster: "",
-    genero: [],
+    gender: [],
     estudio: '',
-    year:1
+    actors: [],
+    year: 1824,
+    rating:0.0
   };
   selectedItems: { item_id: number; item_text: string; }[] | undefined;
 
   constructor(private store: Store<any>) {
-    this.generos = [
-    { id: 12,  tipo: "Accion" },
-    { id: 21,  tipo: "Aventura" },
-    { id: 32,  tipo: "Animación" },
-    { id: 43,  tipo: "ciencia FX" },
-    { id: 54,  tipo: "Drama" },
-    { id: 65,  tipo: "suspenso" },
-    { id: 74,  tipo: "terror" },
-    { id: 83,  tipo: "comedia" }
-    ];
+    this.gender = ["Accion", "Aventura", "Animación", "ciencia FX", "Drama", "suspenso", "terror", "comedia"];
   }
 
   ngOnInit(): void {
-    this.dropdownList = [
-      { item_id: 1, item_text: 'Mumbai' },
-      { item_id: 2, item_text: 'Bangaluru' },
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' },
-      { item_id: 5, item_text: 'New Delhi' }
-    ];
-    this.selectedItems = [
-
-    ];
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
-      allowSearchFilter: true
-    };;
-
+    this.selectedItems = [];
+    this.store.dispatch(actorActions.loadActors());
+    this.getActors();
   }
 
   getActors() {
     this.store.select(actorsReducers.getAllActors).subscribe(
       (Actors: any) => {
         this.actors$ = Actors.actors;
-        let all = Array.of(this.actors$);
-        this.allActors = all;
- }) }
-
+        this.allActors = Actors.actors.map((person: any) => {
+          return Object.assign({}, person, { fullName: `${person['first_name']}  ${person['last_name']}` });
+        });
+        this.allActors = Array.of(this.allActors);
+      })
+  }
 
   onSubmit(objMovie: any) { console.log(objMovie); }
 
-
-
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-
-  }
-
-
+}

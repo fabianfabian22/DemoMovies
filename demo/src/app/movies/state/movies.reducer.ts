@@ -1,7 +1,8 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import  * as  movieActions  from './movies.actions';
-import * as appState  from './../../state/app.state';
-import { Movies } from 'src/models/movie.model';
+import * as appState  from '@app/state/app.state';
+import { Movies } from 'models/movie.model';
+
 
 export interface MovieState {
   movies: Movies[];

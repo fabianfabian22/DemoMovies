@@ -8,8 +8,6 @@ import { MoviesReducer } from './state/movies.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { MoviesEffects } from './state/movies.effects';
 
-
-
 @NgModule({
   declarations: [
     MoviesComponent

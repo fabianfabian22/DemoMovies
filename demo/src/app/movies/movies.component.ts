@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Actors } from 'src/models/actors.model';
-
 
 import  * as  movieActions  from './state/movies.actions';
 import * as reducersMovies from './state/movies.reducer';
 
-import * as actorsReducers from '../actors/state/actors.reducer';
-import * as  actorActions from '../actors/state/actors.actions';
-
-
-
+import * as actorsReducers from '@app/actors/state/actors.reducer';
+import * as  actorActions from '@app/actors/state/actors.actions';
 
 @Component({
   selector: 'app-movies',
