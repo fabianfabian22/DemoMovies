@@ -47,7 +47,7 @@
             />
           </label>
 
-          <label class="block">
+          <!-- <label class="block">
             <span class="text-gray-700">Genero</span>
             <select
               class="
@@ -65,7 +65,7 @@
               <option  *ngFor="let item of generos">{{item}}</option>
 
             </select>
-          </label>
+          </label> -->
 
 
 
@@ -113,34 +113,33 @@
           <label class="block">
             <span class="text-gray-700">Genero</span>
             <ng-multiselect-dropdown
-            [placeholder]="'Genero'"
+            name="genero"
+            [placeholder]="'custom placeholder'"
             [settings]="dropdownSettings"
             [data]="dropdownList"
             [(ngModel)]="selectedItems"
             (onSelect)="onItemSelect($event)"
-            [name]="'estudio'"
-            class="block w-full mt-1 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+
           >
           </ng-multiselect-dropdown>
+
+
           </label>
           <label class="block">
             <span class="text-gray-700">Años</span>
-            <select
-              class="
-                block
-                w-full
-                mt-1
-                rounded-md
-                bg-gray-100
-                border-transparent
-                focus:border-gray-500 focus:bg-white focus:ring-0
-              "
-            >
-              <option>Corporate event</option>
-              <option>Wedding</option>
-              <option>Birthday</option>
-              <option>Other</option>
-            </select>
+            <input
+            type="text"
+            class="
+              mt-1
+              block
+              w-full
+              rounded-md
+              bg-gray-100
+              border-transparent
+              focus:border-gray-500 focus:bg-white focus:ring-0
+            "
+            [(ngModel)]="objMovie.year" name = 'fecha' required
+          />
           </label>
           <label class="block">
             <span class="text-gray-700">Duracion</span>
@@ -162,22 +161,7 @@
             </select>
           </label>
           <label class="block">
-            <span class="text-gray-700">Puntacion</span>
-            <select
-              class="
-                block
-                w-full
-                mt-1
-                rounded-md
-                bg-gray-100
-                border-transparent
-                focus:border-gray-500 focus:bg-white focus:ring-0 "
-            >
-              <option>Corporate event</option>
-              <option>Wedding</option>
-              <option>Birthday</option>
-              <option>Other</option>
-            </select>
+
           </label>
 
 
