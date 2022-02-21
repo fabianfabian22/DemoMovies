@@ -8,7 +8,7 @@ import { AddMoviesForm1Component } from './add-movies-form1.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ShareModule } from '@app/share/share.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
     EffectsModule.forFeature([MoviesEffects]),
     ShareModule,
     FormsModule,
+    ReactiveFormsModule
 
   ]
 })

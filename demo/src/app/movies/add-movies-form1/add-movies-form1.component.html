@@ -1,201 +1,136 @@
-<form  #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)" >
-<div class="antialiased container mx-auto px-20">
-  <div class="max-w-xl mx-auto py-12 divide-y md:max-w-4xl">
-    <div class="py-4">
-      <h1 class="text-4xl font-bold">Formulario de peliculas</h1>
-      <p class="mt-2 text-lg text-gray-600">
-        Formulario para la inserción de peliculas:
-      </p>
+<form  [formGroup]="form"   (ngSubmit)="onSubmit()"  dataType="'multipart/form-data'">
+  <div class="antialiased container mx-auto px-20">
+    <div class="max-w-xl mx-auto py-12 divide-y md:max-w-4xl">
+      <div class="py-4">
+        <h1 class="text-4xl font-bold">Formulario de peliculas</h1>
+        <p class="mt-2 text-lg text-gray-600">
+          Formulario para la inserción de peliculas:
+        </p>
+      </div>
 
-    </div>
+      <div class="py-2">
+        <h2 class="text-2xl font-bold">Agregar pelicula</h2>
+        <div class="mt-8 max-w-md">
+          <div class="grid grid-cols-1 gap-6">
+            <label class="block">
+              <span class="text-gray-700">Titulo</span>
+              <div *ngIf="f['title'].touched && f['title'].invalid" class="">
+                <div *ngIf="f['title'].errors && f['title'].errors['required']">el titulo es requerido.</div>
+                <div *ngIf="f['title'].errors && f['title'].errors['minlength']">el titulo deberia tener minimo 3 caracteres.</div>
+            </div>
+              <input
+                type="text"
+                class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                placeholder=""
+                formControlName="title"
+                name="titulo"
+                required
+              />
+            </label>
+            <label class="block">
+              <span class="text-gray-700">Poster</span>
+              <div *ngIf="f['poster'].touched && f['poster'].invalid" class="">
+                <div *ngIf="f['poster'].errors && f['poster'].errors['required']">Poster es requerido</div>
 
-    <div class="py-2">
-      <h2 class="text-2xl font-bold">Agregar pelicula</h2>
-      <div class="mt-8 max-w-md">
-        <div class="grid grid-cols-1 gap-6">
-          <label class="block">
-            <span class="text-gray-700">Titulo</span>
-            <input
-              type="text"
-              class="
-                mt-1
-                block
-                w-full
-                rounded-md
-                bg-gray-100
-                border-transparent
-                focus:border-gray-500 focus:bg-white focus:ring-0
-              "
-              placeholder=""
-              [(ngModel)]="objMovie.titulo" name = 'titulo' required
-            />
-          </label>
-          <label class="block">
-            <span class="text-gray-700">Poster</span>
-            <input
-              type="text"
-              class="
-                mt-1
-                block
-                w-full
-                rounded-md
-                bg-gray-100
-                border-transparent
-                focus:border-gray-500 focus:bg-white focus:ring-0
-              "
-              [(ngModel)]="objMovie.poster" name = 'poster' required
-            />
-          </label>
-
-          <!-- <label class="block">
-            <span class="text-gray-700">Genero</span>
-            <select
-              class="
-                block
-                w-full
-                mt-1
-                rounded-md
-                bg-gray-100
-                border-transparent
-                focus:border-gray-500 focus:bg-white focus:ring-0
-              "
-              multiple
-              [(ngModel)]="objMovie.genero"    name = 'genero' required
-            >
-              <option  *ngFor="let item of generos">{{item}}</option>
-
-            </select>
-          </label> -->
+              </div>
+              <input
+                type="text"
+                class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                formControlName="poster"
+                name="poster"
+                required
+              />
+            </label>
 
 
+            <label class="block">
+              <span class="text-gray-700">Actores</span>
+              <div *ngIf="f['actors'].touched && f['actors'].invalid" class="">
+                <div *ngIf="f['actors'].errors && f['actors'].errors['required']">Actores  son requerido.</div>
+              </div>
+              <ng-select
+                class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                [items]="allActors[0]"
+                bindLabel="fullName"
+                placeholder="Select actor"
+                appendTo="body"
+                [multiple]="multiple"
+                formControlName="actors"
+                bindValue="id"
+                name="actors"
+              >
+              </ng-select>
+            </label>
+            <label class="block">
+              <span class="text-gray-700">Genero</span>
+              <div *ngIf="f['gender'].touched && f['gender'].invalid" class="">
+                <div *ngIf="f['gender'].errors && f['gender'].errors['required']"> genero es requerido</div>
+              </div>
+              <ng-select
+                class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                [items]="gender"
+                bindLabel="genderType"
+                placeholder="Select item"
+                appendTo="body"
+                [multiple]="multiple"
+                formControlName="gender"
+                name="gender"
+              >
+              </ng-select>
+            </label>
+            <label class="block">
+              <span class="text-gray-700">Años</span>
+              <div *ngIf="f['year'].touched && f['year'].invalid" class="">
+                <div *ngIf="f['year'].errors && f['year'].errors['required']"> El año es requerida</div>
+              </div>
+              <input
+                type="text"
+                class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                formControlName="year"
+                name="fecha"
+                required
+              />
+            </label>
+            <label class="block">
+              <span class="text-gray-700">Duración</span>
+              <div *ngIf="f['duration'].touched && f['duration'].invalid" class="">
+                <div *ngIf="f['duration'].errors && f['duration'].errors['required']">Duración es requerida.</div>
+                </div>
+              <input
+                type="number"
+                class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                formControlName="duration"
+                name="duration"
+                required
+              />
+            </label>
+            <label class="block">
+              <span class="text-gray-700">imdbRating IMGB</span>
+              <div *ngIf="f['imdbRating'].touched && f['imdbRating'].invalid" class="">
+                <div *ngIf="f['imdbRating'].errors && f['imdbRating'].errors['required']">ImdbRating IMGB es requerida.</div>
+              </div>
+              <input
+                type="number"
+                class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                formControlName="imdbRating"
+                name="imdbRating"
+                required
+              />
+            </label>
+            <label class="block"> </label>
 
-          <label class="block">
-            <span class="text-gray-700">Estudios</span>
-            <input
-              type="text"
-              class="
-                mt-1
-                block
-                w-full
-                rounded-md
-                bg-gray-100
-                border-transparent
-                focus:border-gray-500 focus:bg-white focus:ring-0
-              "
-              placeholder=""
-              [(ngModel)]="objMovie.estudio" name = 'estudio' required
-            />
-          </label>
-
-          <label class="block">
-            <span class="text-gray-700">Actores</span>
-            <!-- <select
-              class="
-                block
-                w-full
-                mt-1
-                rounded-md
-                bg-gray-100
-                border-transparent
-                focus:border-gray-500 focus:bg-white focus:ring-0
-              "
-              name = 'actors' ngModel
-            >
-
-            <option  *ngFor="let act of allActors[0]"  value=" {{act['id']}} ">
-               {{act['first_name']}}  {{act['last_name']}}
-            </option>
-            </select>
-            <ul ><li  let act2 of actors>
-              actors
-            </li></ul> -->
-
-            <span class="text-gray-700">Actores</span>
-            <ng-select
-            class="
-                mt-1
-                block
-                w-full
-                rounded-md
-                bg-gray-100
-                border-transparent
-                focus:border-gray-500 focus:bg-white focus:ring-0
-              "
-                             [items]="allActors[0]"
-                             bindLabel="fullName"
-                             placeholder="Select actor"
-                             appendTo="body"
-                              [multiple]="multiple"
-                               [(ngModel)]="objMovie.actors"
-                               bindValue="id"
-                               name="actors">
-                                  </ng-select>
-
-
-
-
-          </label>
-          <label class="block">
-            <span class="text-gray-700">Genero</span>
-            <ng-select
-
-                             [items]="gender"
-                              bindLabel="genderType"
-                              placeholder="Select item"
-                              appendTo="body"
-                              [multiple]="multiple"
-                               [(ngModel)]="objMovie.gender"
-                               name="gender">
-                                  </ng-select>
-
-          </label>
-          <label class="block">
-            <span class="text-gray-700">Años</span>
-            <input
-            type="text"
-            class="
-              mt-1
-              block
-              w-full
-              rounded-md
-              bg-gray-100
-              border-transparent
-              focus:border-gray-500 focus:bg-white focus:ring-0
-            "
-            [(ngModel)]="objMovie.year" name = 'fecha' required
-          />
-          </label>
-          <label class="block">
-            <span class="text-gray-700">Rating IMGB</span>
-            <input
-            type="number"
-            class="
-              mt-1
-              block
-              w-full
-              rounded-md
-              bg-gray-100
-              border-transparent
-              focus:border-gray-500 focus:bg-white focus:ring-0
-            "
-            [(ngModel)]="objMovie.rating" name = 'rating' required
-          />
-          </label>
-          <label class="block">
-
-          </label>
-
-
-          <div class="block">
-            <div class="mt-2">
-              <div>
-                <label class="inline-flex items-center">
-
+            <div class="block">
+              <div class="mt-2">
+                <div>
+                  <label class="inline-flex items-center">
                     <button
-                    type="submit" [disabled]="!myForm.valid"
-                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Guardar</button>
-
-                </label>
+                      type="submit"
+                      class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                    >
+                      Guardar
+                    </button>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -203,6 +138,4 @@
       </div>
     </div>
   </div>
-</div>
 </form>
-{{myForm.value | json}}

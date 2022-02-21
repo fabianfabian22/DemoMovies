@@ -60,5 +60,7 @@ getDataofActors(listOfActors: any[]) {
 
   return salida;
   }
+
+
 }
 

@@ -1,11 +1,11 @@
 export interface Movies {
-  id: string,
+  id: string | number,
   title:  string,
   poster: string,
   genre: string [],
   year: number,
   duration: number,
   imdbRating: number,
-  actors:number []
+  actors: number[],
 
 }

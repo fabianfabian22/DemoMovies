@@ -12,6 +12,7 @@ import { ActorsModule } from './actors/actors.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ShareModule } from './share/share.module';
 import { FormsModule } from '@angular/forms';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 
 @NgModule({
@@ -27,8 +28,7 @@ import { FormsModule } from '@angular/forms';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
     NgMultiSelectDropDownModule.forRoot(),
-   FormsModule
-
+    NgxsLoggerPluginModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

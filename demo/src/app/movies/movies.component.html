@@ -12,6 +12,7 @@
          <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">año {{ product['year' ]}}</span>
          <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">duracion {{ product['duration' ]}} min</span>
          <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">imdbRating {{ product['imdbRating' ]}}</span>
+         <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline"><a [routerLink]="['/movies/detailmovies', product['id' ]]">Mas detalles</a></span>
          <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
 
         <div class="card" *ngFor="let item of getDataofActors(product['actors' ])">

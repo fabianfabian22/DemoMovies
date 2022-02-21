@@ -1,6 +1,7 @@
+import { Actors } from '@app/share/models/actors.model';
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import * as appState  from './../../state/app.state';
-import { Actors } from '../../../models/actors.model';
+
 import * as  actionsActor  from './actors.actions';
 
 export interface ActorsState {

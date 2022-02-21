@@ -1,14 +1,19 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import * as actorsReducers from '@app/actors/state/actors.reducer';
 import * as actorActions from '@app/actors/state/actors.actions';
-import { Store } from '@ngrx/store';
+import * as  movieActions from '../state/movies.actions';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 
+import { Store } from '@ngrx/store';
+import { Movies } from '@app/share/models/movie.model';
+import { State } from '../state/movies.reducer';
 
 @Component({
   selector: 'app-add-movies-form1',
   templateUrl: './add-movies-form1.component.html',
-  styleUrls: ['./add-movies-form1.component.scss']
+  styleUrls: ['./add-movies-form1.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AddMoviesForm1Component implements OnInit {
   gender: any[] = [];
@@ -17,39 +22,54 @@ export class AddMoviesForm1Component implements OnInit {
   multiple = true;
   selectedGeneros = [] as any;
 
-
-  objMovie = {
-    titulo: "",
-    poster: "",
-    gender: [],
-    estudio: '',
-    actors: [],
-    year: 1824,
-    rating:0.0
-  };
   selectedItems: { item_id: number; item_text: string; }[] | undefined;
 
-  constructor(private store: Store<any>) {
-    this.gender = ["Accion", "Aventura", "Animación", "ciencia FX", "Drama", "suspenso", "terror", "comedia"];
+  constructor(private store: Store<State>) {
+    this.gender = ['Accion', 'Aventura', 'Animación', 'ciencia FX', 'Drama', 'suspenso', 'terror', 'comedia'];
+
   }
 
-  ngOnInit(): void {
-    this.selectedItems = [];
-    this.store.dispatch(actorActions.loadActors());
-    this.getActors();
+  form= new FormGroup({
+    title: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    poster: new FormControl('', [Validators.required, Validators.email]),
+    gender: new FormControl('', Validators.required),
+    actors: new FormControl('', Validators.required),
+    year: new FormControl('', Validators.required),
+    duration: new FormControl('', Validators.required),
+    imdbRating: new FormControl('', Validators.required)
+  });
+
+  get f(){
+    return this.form.controls;
   }
 
-  getActors() {
-    this.store.select(actorsReducers.getAllActors).subscribe(
-      (Actors: any) => {
-        this.actors$ = Actors.actors;
-        this.allActors = Actors.actors.map((person: any) => {
-          return Object.assign({}, person, { fullName: `${person['first_name']}  ${person['last_name']}` });
-        });
-        this.allActors = Array.of(this.allActors);
-      })
+
+    ngOnInit(): void {
+      this.selectedItems = [];
+      this.store.dispatch(movieActions.loadMovies());
+      this.store.dispatch(actorActions.loadActors());
+      this.getActors();
+    }
+
+    getActors() {
+      this.store.select(actorsReducers.getAllActors).subscribe(
+        (Actors: any) => {
+          this.actors$ = Actors.actors;
+          this.allActors = Actors.actors.map((person: any) => {
+            return Object.assign({}, person, { fullName: `${person['first_name']}  ${person['last_name']}` });
+          });
+          this.allActors = Array.of(this.allActors);
+        })
+    }
+
+
+  onSubmit() {
+    if (this.form.valid) {
+      if (this.form.dirty) {
+        this.store.dispatch(movieActions.createMovie({ movies: this.form.value }))
+      }
+    }
   }
 
-  onSubmit(objMovie: any) { console.log(objMovie); }
 
 }

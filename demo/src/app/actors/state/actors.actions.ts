@@ -1,6 +1,7 @@
 
+import { Actors } from "@app/share/models/actors.model";
 import { createAction, props } from "@ngrx/store";
-import { Actors } from "models/actors.model";
+
 
 
 export const loadActors = createAction('[Actors]  load  Actors ');
