@@ -11,7 +11,7 @@ export class MoviesEffects {
 
   constructor(private actions$: Actions, private moviesService: MoviesService) { }
 
-  loadProducts$ = createEffect(() => {
+  loadMovies$ = createEffect(() => {
    return this.actions$.pipe(
      ofType(MoviesActios.loadMovies),
      mergeMap(() => this.moviesService.getMovies()
@@ -22,7 +22,7 @@ export class MoviesEffects {
    )
   })
 
-  saveProducts$ = createEffect(() => {
+  saveMovies$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(MoviesActios.createMovie),
       mergeMap(action=> this.moviesService.addMovies(action.movies)

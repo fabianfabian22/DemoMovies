@@ -13,11 +13,12 @@ export const createMovie =
   props<{ movies: Movies }>()
 );
 
-export const SelectMovie =
+export const selectMovie =
   createAction(
   '[Movies] select detail  Movie',
-  props<{currentProductId : number }>()
-);
+  props<{currentMovieId : number }>()
+  );
+
 
 export const saveSuccessMovies =
   createAction('[Movies] Save  success Movies ',

@@ -1,32 +1,23 @@
-<div class="flex flex-wrap  items-center justify-center">
-   <h1 class="text-center text-4xl sm:text-7xl font-extrabold m-5 bg-gradient-to-r from-red-100 to-zinc-600 text-transparent bg-clip-text">Movies</h1>
 
-   <div  *ngFor="let product of movies$ ">
-   <div  class="md:container md:mx-auto">
-     <div class="md:flex">
-       <div class="md:shrink-0">
-         <img class="block mx-auto h-45  shadow-md" src="{{product['poster']}}" alt="{{product['title']}}">
-       </div>
-       <div class="p-8">
-         <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{{ product['title' ]  }}</div>
-         <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">año {{ product['year' ]}}</span>
-         <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">duracion {{ product['duration' ]}} min</span>
-         <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">imdbRating {{ product['imdbRating' ]}}</span>
-         <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline"><a [routerLink]="['/movies/detailmovies', product['id' ]]">Mas detalles</a></span>
-         <span  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
 
-        <div class="card" *ngFor="let item of getDataofActors(product['actors' ])">
-          <span  class="subpixel-antialiased italic font-normal" >
-            {{ item['first_name' ]}} {{ item['last_name' ]}}
-          </span>
-       </div>
-          </span>
+<div class="container mx-auto mt-5 text-center flex flex-wrap">
 
-       </div>
-     </div>
-   </div>
+  <div class="bg-slate-700  flex p-5 m-6  shadow-md" *ngFor="let product of movies$">
+    <img class="w-48 " src="{{product['poster']}}" alt="{{product['title']}}" />
+    <div class="p-1 m-2  w-48">
+      <div class="bg-slate-400 p-4 m-1">{{ product['title' ]  }} (  {{ product['year' ]}})</div>
+      <div class="bg-slate-400 p-4 m-1">
+      <span *ngFor="let genero of product['genre']" >{{genero}} </span>
+      </div>
+      <div class="bg-slate-400 p-4 m-1">{{ product['duration' ]}}  /raiting: {{ product['imdbRating' ]}}</div>
+      <div class="bg-slate-400 p-4 m-1" (click)="goToSeeDetail(product['id' ])" >Mas detalle</div>
+    </div>
   </div>
+
+
 </div>
+
+
 <div  *ngIf="loading"  class="flex items-center justify-center space-x-2 animate-pulse">
   <div class="w-8 h-8 bg-blue-400 rounded-full"></div>
   <div class="w-8 h-8 bg-blue-600 rounded-full"></div>

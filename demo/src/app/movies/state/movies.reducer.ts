@@ -30,22 +30,28 @@ export const MoviesReducer = createReducer < MovieState > (
   on(movieActions.loadSuccessMovies, (state, action): MovieState => {
     return {
       ...state,
-      movies: action.movies
+      movies: action.movies,
+      currentProductId: null
     };
   }),
+
   on(movieActions.saveSuccessMovies, (state, action): MovieState => {
     return {
       ...state,
-      movies: [...state.movies, action.movies]
+      movies: [...state.movies, action.movies],
+      currentProductId: null
     };
   }),
-  on(movieActions.SelectMovie, (state, action): MovieState => {
+
+  on(movieActions.selectMovie, (state, action): MovieState => {
     return {
       ...state,
-      currentProductId : action.currentProductId
+      currentProductId : action.currentMovieId
     };
 
   })
+
+
 
 );
 
@@ -55,14 +61,15 @@ export const getAllMovies = createSelector(
   getMoviesFeatureState,
   state => state
 );
-export const getCurrentProductId = createSelector(
+
+export const getCurrentMovieId = createSelector(
   getMoviesFeatureState,
   state => state.currentProductId
 );
 
 export const getCurrentMovies = createSelector(
   getMoviesFeatureState,
-  getCurrentProductId,
+  getCurrentMovieId,
   (state, currentProductId) => {
     if (currentProductId === 0) {
       return {

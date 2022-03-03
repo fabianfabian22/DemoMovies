@@ -5,7 +5,7 @@ import { MoviesComponent } from './movies.component';
 const routes: Routes = [
   { path: '', component: MoviesComponent },
   { path: 'addmovies', loadChildren: () => import('./add-movies-form1/add-movies-form1.module').then(m => m.AddMoviesForm1Module) },
-  { path: 'detailmovies/:id', loadChildren: () => import('./detail/detail.module').then(m => m.DetailModule) }
+  { path: 'detailmovies', loadChildren: () => import('./detail/detail.module').then(m => m.DetailModule) }
 ];
 
 @NgModule({

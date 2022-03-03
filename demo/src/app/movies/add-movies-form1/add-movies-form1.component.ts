@@ -31,8 +31,8 @@ export class AddMoviesForm1Component implements OnInit {
 
   form= new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    poster: new FormControl('', [Validators.required, Validators.email]),
-    gender: new FormControl('', Validators.required),
+    poster: new FormControl('', [Validators.required]),
+    genre: new FormControl('', Validators.required),
     actors: new FormControl('', Validators.required),
     year: new FormControl('', Validators.required),
     duration: new FormControl('', Validators.required),
@@ -64,8 +64,9 @@ export class AddMoviesForm1Component implements OnInit {
 
 
   onSubmit() {
+
     if (this.form.valid) {
-      if (this.form.dirty) {
+       if (this.form.dirty) {
         this.store.dispatch(movieActions.createMovie({ movies: this.form.value }))
       }
     }

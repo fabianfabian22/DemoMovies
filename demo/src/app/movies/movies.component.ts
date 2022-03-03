@@ -6,6 +6,9 @@ import * as reducersMovies from './state/movies.reducer';
 
 import * as actorsReducers from '@app/actors/state/actors.reducer';
 import * as  actorActions from '@app/actors/state/actors.actions';
+import { Movies } from '../share/models/movie.model';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-movies',
@@ -17,33 +20,40 @@ export class MoviesComponent implements OnInit {
   actors$: any;
   movieActors: any[] = [];
   loading = true;
+  allActors: any[] = [];
 
-  constructor(private store: Store<any>) { }
+  private currentMovieSubject: BehaviorSubject<any> = new BehaviorSubject({});
+  public readonly currentUser: Observable<any> = this.currentMovieSubject.asObservable();
+
+
+
+  constructor(private store: Store<any>, private router : Router) { }
 
   ngOnInit(): void {
     this.loading = true;
     this.store.dispatch(movieActions.loadMovies());
     this.store.dispatch(actorActions.loadActors());
-    setTimeout(() => {
+
       this.store.select(reducersMovies.getAllMovies).subscribe(allMovies => {
         this.movies$ = allMovies.movies.filter(movie => movie.poster !== null);
         this.getActors();
       })
-   }, 1000)
+
   }
 
   getActors() {
     this.store.select(actorsReducers.getAllActors).subscribe(
-      Actors => {
+      (Actors: any) => {
         this.actors$ = Actors.actors;
+        this.allActors = Actors.actors.map((person: any) => {
+          return Object.assign({}, person, { fullName: `${person['first_name']}  ${person['last_name']}` });
+        });
+        this.allActors = Array.of(this.allActors);
       })
-      this.loading = false;
-
   }
 
 getDataofActors(listOfActors: any[]) {
     let salida:any[]=[];
-
     listOfActors.map((persona: number) => {
       for (let q = 0; q < this.movies$.length; q++) {
         const element = this.movies$[q]
@@ -61,6 +71,17 @@ getDataofActors(listOfActors: any[]) {
   return salida;
   }
 
+  goToSeeDetail(id: number) {
+    this.store.dispatch(movieActions.selectMovie({ currentMovieId: id }));
+    this.store.select(reducersMovies.getAllMovies).subscribe(allMovies => {
+      this.movies$ = allMovies.movies.filter(movie => movie.id === id);
+      this.getActors();
+      let movie = Object.assign({}, this.movies$, this.allActors);
+      console.log('movie: ', movie[0]);
+
+    })
+   // this.router.navigateByUrl('/movies/detailmovies' );
+  }
 
 }
 
