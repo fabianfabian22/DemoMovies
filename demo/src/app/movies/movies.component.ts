@@ -8,7 +8,7 @@ import * as actorsReducers from '@app/actors/state/actors.reducer';
 import * as  actorActions from '@app/actors/state/actors.actions';
 import { Movies } from '../share/models/movie.model';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-movies',
@@ -33,11 +33,35 @@ export class MoviesComponent implements OnInit {
     this.loading = true;
     this.store.dispatch(movieActions.loadMovies());
     this.store.dispatch(actorActions.loadActors());
+    this.getActors();
+    this.store.select(reducersMovies.getAllMovies).subscribe(allMovies => {
+      this.movies$ = allMovies.movies;
+      this.movies$ = allMovies.movies.map(movie => {
 
-      this.store.select(reducersMovies.getAllMovies).subscribe(allMovies => {
-        this.movies$ = allMovies.movies.filter(movie => movie.poster !== null);
-        this.getActors();
+
+        this.getDataofActors(movie.actors);
+        return Object.assign({}, movie, { actores: this.getDataofActors(movie.actors) });
+      });
+
       })
+
+  }
+
+
+  getActorPerMovies(actores: number[]) {
+    let list: any[];
+    actores.map((actor: number) => {
+      return this.allActors.map((actores2: any[]) => {
+        console.log('actores2: ', actores2);
+
+       // if (Number(actores2.get()) === actor) {
+        //  return  list.push(actores)
+        // }
+      }
+      )
+    }
+
+    )
 
   }
 

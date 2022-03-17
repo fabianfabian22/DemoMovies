@@ -9,6 +9,10 @@
       <div class="bg-slate-400 p-4 m-1">
       <span *ngFor="let genero of product['genre']" >{{genero}} </span>
       </div>
+
+      <div class="bg-slate-400 p-4 m-1">
+        <span *ngFor="let actor of product['actores']" >{{actor['first_name']}}  {{actor['last_name']}} </span>
+        </div>
       <div class="bg-slate-400 p-4 m-1">{{ product['duration' ]}}  /raiting: {{ product['imdbRating' ]}}</div>
       <div class="bg-slate-400 p-4 m-1" (click)="goToSeeDetail(product['id' ])" >Mas detalle</div>
     </div>
